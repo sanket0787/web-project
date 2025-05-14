@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoneverse.in | Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            /* Background Image */
+            background-image: url('images/vivo-loginpage.png'); /* Path to your image */
+            background-size: cover; /* Fill the entire screen */
+            background-position: center; /* Center the image */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* For overlay */
+        }
+
+        /* Dark overlay to improve text visibility */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay for glass effect */
+        }
+
+        .login-container {
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            color: white; /* Light text for contrast */
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #fff; /* White title */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            color: white;
+            margin-top: 0.3rem;
+        }
+
+        /* Placeholder text color */
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .error-message {
+            color: #ff6b6b; /* Light red for visibility */
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="login-container">
+        <h1>PhoneVerse.in</h1>
+        <form id="loginForm" onsubmit="return validateLogin(event)">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="error-message" id="errorMessage">
+                Invalid username or password!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Hardcoded credentials
+        const validUsername = "admin";
+        const validPassword = "123";
+
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (username === validUsername && password === validPassword) {
+                window.location.href = "index.html";
+            } else {
+                errorMessage.style.display = "block";
+                setTimeout(() => {
+                    errorMessage.style.display = "none";
+                }, 3000);
+            }
+        }
+    </script>
+    <script>
+        const validUsername = "admin";
+        const validPassword = "123";
+
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (username === validUsername && password === validPassword) {
+                // Store authentication status
+                localStorage.setItem('authenticated', 'true');
+                // Redirect to home page
+                window.location.href = "index.html";
+            } else {
+                errorMessage.style.display = "block";
+                setTimeout(() => {
+                    errorMessage.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        // Check if already logged in when page loads
+        window.onload = function() {
+            if (localStorage.getItem('authenticated') === 'true') {
+                window.location.href = "index.html";
+            }
+        };
+    </script>
+</body>
+</html>
